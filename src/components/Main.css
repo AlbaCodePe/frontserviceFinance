@@ -1,0 +1,92 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #004d40;
+  color: #fff;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.main-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffffff;
+  padding: 10px 20px;
+  color: #004d40;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo img {
+  height: 50px;
+}
+
+.main-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.main-nav a, .main-nav button {
+  color: #004d40;
+  text-decoration: none;
+  margin: 0 20px;
+  font-weight: bold;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.logout-button {
+  color: #004d40;
+  text-decoration: none;
+  margin: 0 20px;
+  font-weight: bold;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.profile-icon {
+  height: 50px;
+  border-radius: 50%;
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #004d40;
+}
+
+.welcome-card {
+  background-color: #ffffff;
+  color: #004d40;
+  padding: 40px; /* Incrementar el padding para hacerlo más grande */
+  border-radius: 10px;
+  text-align: center;
+  width: 50%; /* Incrementar el ancho para ocupar más espacio */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Añadir sombra para mejor apariencia */
+}
+
+.welcome-image {
+  width: 200px; /* Incrementar el tamaño de la imagen */
+  margin-top: 20px;
+}
+
+.footer {
+  text-align: center;
+  padding: 10px;
+  background-color: #002d26;
+  color: #ffffff;
+}

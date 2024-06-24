@@ -1,0 +1,75 @@
+.gestion-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .gestion-header {
+    margin-bottom: 20px;
+  }
+  
+  .gestion-title {
+    font-size: 24px;
+    color: #333;
+  }
+  
+  .gestion-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 600px;
+  }
+  
+  .gestion-inputs {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  .gestion-inputs label {
+    margin-top: 10px;
+  }
+  
+  .gestion-inputs input {
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .fund-flow {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .gestion-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .gestion-buttons button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .gestion-buttons button:hover {
+    background-color: #218838;
+  }
+  
+  .gestion-result {
+    margin-top: 20px;
+    font-size: 18px;
+    color: #333;
+  }
+  

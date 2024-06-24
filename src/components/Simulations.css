@@ -1,0 +1,113 @@
+.simulations-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+.simulation-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: hwb(0 100% 0%);
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+.simulation-paragrah{
+    font-size: 15px;
+    color: hwb(0 100% 0%);
+    margin-bottom: 2px;
+}
+.simulations-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffffff;
+  padding: 10px 20px;
+  color: #004d40;
+}
+
+.logo img {
+  height: 50px;
+}
+
+.main-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.main-nav a {
+  color: #004d40;
+  text-decoration: none;
+  margin: 0 20px;
+  font-weight: bold;
+}
+
+.logout-button {
+  background: none;
+  border: none;
+  color: #004d40;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.user-icon img {
+  height: 50px;
+  border-radius: 50%;
+}
+
+.simulations-main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #004d40;
+}
+
+.simulations-content {
+  background-color: #333;
+  padding: 40px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 600px;
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.cash-flow-group {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.add-cash-flow-button,
+.calculate-button {
+  background-color: #28a745;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.add-cash-flow-button:hover,
+.calculate-button:hover {
+  background-color: #218838;
+}
+
+.results {
+  margin-top: 20px;
+  text-align: left;
+}
+
+.footer {
+  text-align: center;
+  padding: 10px;
+  background-color: #002d26;
+  color: #ffffff;
+}
