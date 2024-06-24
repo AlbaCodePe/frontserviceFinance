@@ -17,15 +17,26 @@ const Operation = () => {
   const [gracePeriod, setGracePeriod] = useState('');
   const [gracePeriodsCount, setGracePeriodsCount] = useState('');
   const [monthlyPayment, setMonthlyPayment] = useState(null);
+  const [operationDetails, setOperationDetails] = useState('');
 
   const handleCalculate = () => {
     let principal = parseFloat(creditValue);
     let interestRate = parseFloat(rateValue) / 100;
     let numPayments = parseInt(installments, 10);
+    let initialQuotaAmount = principal * (parseFloat(initialQuota) / 100);
+    let loanAmount = principal - initialQuotaAmount;
+    let gracePeriods = parseInt(gracePeriodsCount, 10);
+    let effectiveInterestRate = interestRate / 12; // asuming monthly capitalization for simplicity
 
-    // Ejemplo de cálculo simple de interés compuesto
-    let payment = (principal * interestRate) / (1 - Math.pow(1 + interestRate, -numPayments));
+    // Adjust for grace period
+    let gracePeriodAmount = loanAmount * Math.pow(1 + effectiveInterestRate, gracePeriods);
+
+    // Payment calculation using annuity formula
+    let payment = (gracePeriodAmount * effectiveInterestRate) / (1 - Math.pow(1 + effectiveInterestRate, -numPayments));
     setMonthlyPayment(payment.toFixed(2));
+
+    // Operation details
+    setOperationDetails(`Valor del crédito: ${creditValue}, Cuotas: ${installments}, Tasa de interés: ${rateValue}%, Pago mensual: ${payment.toFixed(2)}`);
   };
 
   const navigate = useNavigate();
@@ -44,6 +55,7 @@ const Operation = () => {
         <nav className="main-nav">
           <Link to="/">Inicio</Link>
           <Link to="/operations">Realizar Operación</Link>
+          <Link to="/gestion">Gestiones</Link>
           <Link to="/simulations">Simulaciones</Link>
           <button onClick={handleLogout} className="logout-button">Cerrar Sesión</button>
         </nav>
@@ -143,7 +155,7 @@ const Operation = () => {
           </div>
           <div className="form-column">
             <div className="form-group">
-              <label>7. Seleccionar tiempo de la tasa:</label>
+              <label>7. Seleccionar tiempo de la tasa (días):</label>
               <input
                 type="number"
                 value={rateTime}
@@ -151,7 +163,7 @@ const Operation = () => {
               />
             </div>
             <div className="form-group">
-              <label>8. Ingresa el valor de la tasa:</label>
+              <label>8. Ingresa el valor de la tasa (%):</label>
               <input
                 type="number"
                 value={rateValue}
@@ -175,7 +187,7 @@ const Operation = () => {
               </select>
             </div>
             <div className="form-group">
-              <label>10. Seleccionar plazo de gracia:</label>
+              <label>10. Seleccionar plazo de gracia (meses):</label>
               <input
                 type="number"
                 value={gracePeriod}
@@ -194,6 +206,7 @@ const Operation = () => {
           </div>
           <div className="operation-details">
             <p>{monthlyPayment !== null ? `Pago mensual: ${monthlyPayment}` : 'Aquí se mostrarán los detalles de la operación'}</p>
+            <p>{operationDetails}</p>
           </div>
         </div>
       </main>

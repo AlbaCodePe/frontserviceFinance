@@ -1,75 +1,145 @@
+/* Contenedor principal para gestión */
 .gestion-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-  }
-  
-  .gestion-header {
-    margin-bottom: 20px;
-  }
-  
-  .gestion-title {
-    font-size: 24px;
-    color: #333;
-  }
-  
-  .gestion-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    max-width: 600px;
-  }
-  
-  .gestion-inputs {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    margin-bottom: 20px;
-  }
-  
-  .gestion-inputs label {
-    margin-top: 10px;
-  }
-  
-  .gestion-inputs input {
-    width: 100%;
-    padding: 5px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  .fund-flow {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-  }
-  
-  .gestion-buttons {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .gestion-buttons button {
-    margin-top: 10px;
-    padding: 10px 20px;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .gestion-buttons button:hover {
-    background-color: #218838;
-  }
-  
-  .gestion-result {
-    margin-top: 20px;
-    font-size: 18px;
-    color: #333;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: #004d40; /* Fondo oscuro */
+  min-height: 100vh; /* Altura mínima de la pantalla */
+  box-sizing: border-box;
+}
+
+/* Encabezado */
+.gestion-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 10px 20px;
+  background-color: #ffffff;
+  color: #004d40;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para mayor profundidad */
+  box-sizing: border-box;
+}
+
+.gestion-header .logo img {
+  height: 50px;
+}
+
+.gestion-header .main-nav {
+  display: flex;
+  gap: 20px;
+}
+
+.gestion-header .main-nav a,
+.gestion-header .logout-button {
+  color: #004d40;
+  text-decoration: none;
+  padding: 10px 20px;
+  font-weight: bold;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.gestion-header .main-nav a:hover,
+.gestion-header .logout-button:hover {
+  color: #00796b;
+}
+
+.gestion-header .profile {
+  display: flex;
+  align-items: center;
+}
+
+.gestion-header .profile-icon {
+  height: 40px;
+  border-radius: 50%;
+}
+
+/* Contenido principal */
+.gestion-content {
+  background-color: #333;
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 1000px;
+  margin-top: 30px; /* Separación del encabezado */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.gestion-content h2 {
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+.gestion-inputs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  width: 100%;
+}
+
+.gestion-inputs label {
+  display: block;
+  margin-bottom: 5px;
+  color: #ccc;
+}
+
+.gestion-inputs input,
+.gestion-inputs select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #444;
+  color: white;
+}
+
+.gestion-inputs input[type="radio"] {
+  width: auto;
+  margin-right: 5px;
+}
+.gestion-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.gestion-buttons button {
+  padding: 10px 20px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  width: 48%;
+}
+
+.gestion-buttons button:hover {
+  background-color: #218838;
+}
+
+.gestion-result {
+  margin-top: 20px;
+  font-size: 18px;
+  color: #333;
+  text-align: center;
+}
+
+/* Pie de página */
+.gestion-footer {
+  margin-top: auto;
+  padding: 20px;
+  background-color: #002d26;
+  color: white;
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
+}

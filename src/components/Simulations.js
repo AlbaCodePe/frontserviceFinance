@@ -33,50 +33,50 @@ const Simulations = () => {
     const dr = parseFloat(discountRate) / 100;
 
     // VAN Calculation
-    const vanValue = cashFlows.reduce((acc, flow, index) => {
+    const vanValue = cashFlows.reduce((acc, flow) => {
       return acc + flow.amount / Math.pow(1 + dr, flow.period);
     }, 0);
 
-    // TIR Calculation (simple trial and error approach)
-    const irr = (cashFlows, iterations, step) => {
-      let rate = 0.1;
+    // TIR Calculation using Newton-Raphson method
+    const calculateIRR = (cashFlows, guess = 0.1) => {
+      const maxIter = 1000;
+      const tol = 0.0001;
 
-      const calculateNpv = (rate) => {
-        return cashFlows.reduce((acc, flow) => {
-          return acc + flow.amount / Math.pow(1 + rate, flow.period);
-        }, 0);
-      };
+      const f = (r) => cashFlows.reduce((acc, flow) => acc + flow.amount / Math.pow(1 + r, flow.period), 0);
+      const fPrime = (r) => cashFlows.reduce((acc, flow) => acc - (flow.period * flow.amount) / Math.pow(1 + r, flow.period + 1), 0);
 
-      for (let i = 0; i < iterations; i++) {
-        let npv = calculateNpv(rate);
-
-        if (Math.abs(npv) < 0.0001) return rate * 100;
-        if (npv > 0) rate += step;
-        else rate -= step;
+      let rate = guess;
+      for (let i = 0; i < maxIter; i++) {
+        const newRate = rate - f(rate) / fPrime(rate);
+        if (Math.abs(newRate - rate) < tol) {
+          return newRate * 100;
+        }
+        rate = newRate;
       }
-
       return 'No Convergence';
     };
 
     // B/C Calculation
-    const bcValue = cashFlows.reduce((acc, flow) => {
-      if (flow.amount > 0) {
-        return acc + flow.amount / Math.pow(1 + dr, flow.period);
-      }
-      return acc;
-    }, 0) / -cashFlows[0].amount;
+    const benefits = cashFlows.filter(flow => flow.amount > 0).reduce((acc, flow) => acc + flow.amount / Math.pow(1 + dr, flow.period), 0);
+    const costs = Math.abs(cashFlows.filter(flow => flow.amount < 0).reduce((acc, flow) => acc + flow.amount / Math.pow(1 + dr, flow.period), 0));
+    const bcValue = benefits / costs;
 
     // PRD Calculation
     let cumulativeCashFlow = 0;
-    const prdValue = cashFlows.find(flow => {
-      cumulativeCashFlow += flow.amount;
-      return cumulativeCashFlow >= 0;
-    })?.period;
+    let prdValue = null;
+    for (let i = 0; i < cashFlows.length; i++) {
+      cumulativeCashFlow += cashFlows[i].amount / Math.pow(1 + dr, cashFlows[i].period);
+      if (cumulativeCashFlow >= 0) {
+        prdValue = cashFlows[i].period;
+        break;
+      }
+    }
+    prdValue = prdValue !== null ? prdValue : 'N/A';
 
     setVan(vanValue.toFixed(2));
-    setTir(irr(cashFlows, 10000, 0.0001));
+    setTir(calculateIRR(cashFlows).toFixed(2));
     setBc(bcValue.toFixed(2));
-    setPrd(prdValue !== undefined ? prdValue : 'N/A');
+    setPrd(prdValue);
   };
 
   return (
@@ -98,7 +98,8 @@ const Simulations = () => {
       </header>
       <main className="simulations-main">
         <div className="simulations-content">
-        <h2 className="simulation-title">Simulaciones Financieras</h2>          <div className="form-group">
+          <h2 className="simulation-title">Simulaciones Financieras</h2>
+          <div className="form-group">
             <label>Tasa de descuento (%):</label>
             <input
               type="number"
@@ -123,10 +124,10 @@ const Simulations = () => {
           <button onClick={calculateIndicators} className="calculate-button">Calcular Indicadores</button>
           {van !== null && (
             <div className="results">
-              <p className="simulation-paragrah"><strong>VAN (Valor Actual Neto):</strong> {van}</p>
-              <p className="simulation-paragrah"><strong>TIR (Tasa Interna de Retorno):</strong> {tir}</p>
-              <p className="simulation-paragrah"><strong>B/C (Beneficio/Costo):</strong> {bc}</p>
-              <p className="simulation-paragrah"><strong>PRD (Periodo de Recuperación de la Inversión):</strong> {prd}</p>
+              <p className="simulation-paragraph"><strong>VAN (Valor Actual Neto):</strong> {van}</p>
+              <p className="simulation-paragraph"><strong>TIR (Tasa Interna de Retorno):</strong> {tir}</p>
+              <p className="simulation-paragraph"><strong>B/C (Beneficio/Costo):</strong> {bc}</p>
+              <p className="simulation-paragraph"><strong>PRD (Periodo de Recuperación de la Inversión):</strong> {prd}</p>
             </div>
           )}
         </div>
